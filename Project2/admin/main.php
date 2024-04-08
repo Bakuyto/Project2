@@ -1,48 +1,34 @@
-<?php include '../connection/redirect.php'?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Main Page</title>
-  <link rel="stylesheet" href="../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../css/main.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Document</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-<div class="contain-fluid">
-<nav class="sticky-top top-0" style="background-color:white; z-index:999;">
-      <ul>
-        <li>
-          <a class="active" href="#">Main</a>
-        </li>
-        <li>
-          <a href="test.php">Test</a>
-        </li>
-        <li>
-          <a href="create-user.php">Create</a>
-        </li>
-      </ul>
-    </nav>
-      <div class="main-header px-3 sticky-top bg-light" style='top:60px;'>
-        <form class="d-flex" id="searchForm">
+<?php include 'include/header.php'; ?>
+
+<!-- Main Content -->
+<div class="container-fluid border">
+<div class="container main-header d-flex justify-content-between py-3">
+        <form id="searchForm">
           <input class="form-control me-1" type="search"  id="searchInput" placeholder="Search by Name" aria-label="Search" style="width:260px">
         </form>
-        
-        
 
         <div class="form-inline d-flex flex-row gap-1">
           <button type="button" class="btn btn-primary" onclick="$('#addModal').modal('show')">Create</button>
           <input type="number" id="row" style="width:80px; height: 40px;" class="form-control"/>
           <button type="button" class="btn btn-success" id="filter">Filter</button>
         </div>
-        
       </div>
-      
-      <section>
-  <div class="tables container-fluid tbl-container d-flex flex-column justify-content-center align-content-center" style="height:75 vh;">
+</div>
+
+<section>
+  <div class="tables container tbl-container d-flex flex-column justify-content-center align-content-center" style="height:75 vh;">
     <div class="row tbl-fixed">
       <table class="table-striped table-condensed" style="width:1920px !important;" id="myTable">
       <thead>
@@ -55,7 +41,7 @@
 
               if ($result && $result->num_rows > 0) {
                   $row = $result->fetch_assoc(); // Fetching only the first row
-                  echo "<th class='text-center border-end border-light'>No<br><br><span ></span></th>";
+                  echo "<th class='text-center border-end'>No<br><br><span ></span></th>";
                   // Iterate through each column
                   foreach ($row as $column_name => $value) {
                     
@@ -89,7 +75,7 @@
                       }
 
                       // Output the table header for each column
-                      echo "<th id='$column_name' class='text-center border-end border-light' style='$background_color'>";
+                      echo "<th id='$column_name' class='text-center border-end' style='$background_color'>";
                       // Special treatment for specific columns
                       switch ($column_name) {
                           case 'ETA':
@@ -133,15 +119,16 @@
   </div>
 </section>
 
-      
-    <div class="buttons d-flex align-content-end justify-content-end mt-3 px-2">
-      <div class="page-of">Page <span id="current-page">1</span> of <span id="total-pages">1</span></div>
+<div class="container">
+<div class="buttons d-flex align-content-end justify-content-end mt-3 px-2">
+      <div class="page-of mt-2 me-2">Page <span id="current-page">1</span> of <span id="total-pages">1</span></div>
       <button id="prev-btn">Prev</button>
       <input type="number" placeholder="1" id="page-number" disabled>
       <button id="next-btn">Next</button>
     </div>
 </div>
-
+</div>
+<?php include 'include/footer.php'; ?>
 <!-- Modal -->
 <div class="modal fade" style="--bs-modal-width: 1000px !important;" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -151,7 +138,7 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="process_form.php">
+                <form method="POST" action="actions/process_form.php">
                     <div class="row g-3" style="display: flex; flex-wrap: nowrap; overflow-x: auto;">
                         <?php
                             include '../connection/connect.php';
@@ -190,13 +177,9 @@
         </div>
     </div>
 </div>
-
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="../js/jquery.tabledit.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/main.js"></script>
 <!-- Make tbody editable -->
 <script>
   $(document).ready(function() {
@@ -256,7 +239,7 @@
     function fetchData(searchText = '') {
         // Modify your SQL query to include the search text as a parameter
         $.ajax({
-            url: "fetch_data.php?search=" + searchText,
+            url: "actions/fetch_data.php?search=" + searchText,
             type: "GET",
             dataType: "json",
             success: function(response) {
@@ -315,6 +298,15 @@
         });
     }
 
+    // Function to update pagination controls
+    function updatePagination() {
+      var totalPages = Math.ceil(totalRecords / rowsPerPage);
+      $("#current-page").text(currentPage);
+      $("#total-pages").text(totalPages);
+      $("#page-number").val(currentPage); // Update input field value
+    }
+
+
     function updateValue(cell, newValue, oldValue) {
       var column = cell.attr("data-column");
 
@@ -329,7 +321,7 @@
 
       // Send AJAX request to update the value
       $.ajax({
-        url: "update.php",
+        url: "actions/update.php",
         type: "POST",
         data: {
           id: productId,
@@ -361,6 +353,37 @@
         }
       });
     }
+
+    // Function to handle pagination
+    function paginate(direction) {
+      var totalPages = Math.ceil(totalRecords / rowsPerPage);
+      if (direction === "next" && currentPage < totalPages) {
+        currentPage++;
+      } else if (direction === "prev" && currentPage > 1) {
+        currentPage--;
+      }
+      fetchData(); // Fetch data for the updated page
+    }
+
+    // Previous button click event
+    $("#prev-btn").click(function() {
+      paginate("prev");
+    });
+
+    // Next button click event
+    $("#next-btn").click(function() {
+      paginate("next");
+    });
+
+    // Input field change event
+    $("#page-number").on("change", function() {
+      var pageNum = parseInt($(this).val());
+      if (!isNaN(pageNum) && pageNum >= 1 && pageNum <= Math.ceil(totalRecords / rowsPerPage)) {
+        currentPage = pageNum;
+        fetchData(); // Fetch data for the updated page
+      }
+    });
+
 
     // Combine filtering and pagination logic
     $('#filter').on('click', function() {
@@ -395,7 +418,7 @@
     function updateSums() {
         // AJAX request to fetch sum data from server
         $.ajax({
-            url: 'fetch_sums.php',
+            url: 'actions/fetch_sums.php',
             method: 'GET',
             dataType: 'json',
             success: function(data) {

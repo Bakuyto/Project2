@@ -1,44 +1,24 @@
-<?php include '../connection/redirect.php';?>
-<?php include '../connection/connect.php'; ?>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create User Page</title>
-  <link rel="stylesheet" href="../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/create-user.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Create-User</title>
+  <link rel="stylesheet" href="assets/css/create.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-
 <body>
-
-  <div class="conatiner_fluid" >
-    <nav class=" sticky-top top-0 border" style="background-color:white; z-index:999;">
-      <ul>
-        <li>
-          <a href="main.php">Main</a>
-        </li>
-        <li>
-          <a href="test.php">Test</a>
-        </li>
-        <li>
-          <a class="active" href="#">Create</a>
-        </li>
-      </ul>
-    </nav>
-
-    <div class="container-fluid">
+  <?php include 'include/header.php'; ?>
+  
+  <!-- Main Content -->
+  <div class="container-fluid">
       <div class="row m-auto text-center">
-        <div class="box1 col-sm-12 col-lg-4 ">
+        <div class="box1 col-sm-12 col-lg-4 border">
           <div class="box-header">
             <div class="h1 mt-5">New Department</div>
-            <form method="POST" action="insert-department.php">
+            <form method="POST" action="actions/insert-department.php">
               <input name="department_name" class="form-control m-auto mt-5 border-black" style="width:80%;" required>
               <div class="save-but d-flex justify-content-center m-auto mt-5">
                 <button type="submit" name="submit_department" style="background-color: var(--blue);"
@@ -50,7 +30,7 @@
             <div class="table-container tbl-fixed" style="height:90vh;">
               <table class="table table-bordered">
                 <thead>
-                  <tr class=" sticky-top top-0" style="z-index:1;">
+                  <tr>
                     <th class="border text-center" scope="col" style="background-color: var(--blue); height:50px;">
                       Department
                     </th>
@@ -97,7 +77,7 @@
         <div class="box2 col-sm-12 col-lg-4 border">
           <div class="box-header">
             <div class="h1 mt-5">New Transaction</div>
-            <form method="POST" action="insert-column.php">
+            <form method="POST" action="actions/insert-column.php">
               <input name="column_name" class="form-control m-auto mt-5 border-black" style="width:80%;" required>
               <div class="save-but d-flex justify-content-center m-auto mt-5">
                 <button type="submit" name="submit_transaction" style="background-color: var(--blue);"
@@ -109,7 +89,7 @@
             <div class="table-container tbl-fixed" style="height:90vh;">
               <table class="table table-bordered">
                 <thead>
-                  <tr class=" sticky-top top-0" style="z-index:1;">
+                  <tr>
                     <th class="border text-center" scope="col" style="background-color: var(--blue); height:50px;">
                       Transation
                     </th>
@@ -146,9 +126,9 @@
           </div>
         </div>
 
-        <div class="box3 col-sm-12 col-lg-4">
+        <div class="box3 col-sm-12 col-lg-4 border">
           <div class="h1 mt-5">New User</div>
-              <form method="POST" action="insert-user.php">
+              <form method="POST" action="actions/insert-user.php">
           <div class="form-group">
           <label class="d-flex mx-5 text-start">FullName</label>
           <input type="text" name="user_full_name" class="form-control m-auto mb-3 border-black" style="width:80%;" required>
@@ -259,9 +239,8 @@
     </div>
   </div>
   </div>
-  </div>
-
-<!-- Modal -->
+  <?php include 'include/footer.php'; ?>
+  <!-- Modal -->
 <div id="updateModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -269,7 +248,7 @@
                 <h5 class="modal-title" id="exampleModalLabel">Update</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="updateUserForm" method="POST" action="update-user.php">
+            <form id="updateUserForm" method="POST" action="actions/update-user.php">
                 <input type="hidden" id="user_pk" name="user_pk" value="">
                 <div class="form-group">
                     <label class="d-flex mx-5 text-start">FullName</label>
@@ -345,7 +324,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method='POST' action="save-multiple-checkbox.php">
+                <form method='POST' action="actions/save-multiple-checkbox.php">
                   <?php
                   include '../connection/connect.php';
 
@@ -387,7 +366,7 @@
         </div>
         <div class="modal-body">
           <p>Are you sure you want to delete this transaction?</p>
-          <form id="deleteTransactionForm" action="delete-column.php" class="d-flex justify-content-center" method="POST">
+          <form id="deleteTransactionForm" action="actions/delete-column.php" class="d-flex justify-content-center" method="POST">
             <input type="hidden" name="transactionToDelete" id="transactionToDelete">
             <button type="button" class="btn btn-secondary mx-1" data-bs-dismiss="modal">Cancel</button>
             <button type="submit" name="submit_delete_transaction" class="btn btn-danger">Delete</button>
@@ -397,8 +376,6 @@
     </div>
   </div>
 </body>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/create-user.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
  $(document).ready(function (){
@@ -445,5 +422,15 @@
     document.getElementById('transactionToDelete').value = transactionName;
   }
 </script>
-
+<script>
+   document.querySelectorAll('.plus-btn').forEach(button => {
+        button.addEventListener('click', function () {
+          var departmentName = this.getAttribute('data-department-name');
+          var modalTitle = document.querySelector('#exampleModal .modal-title');
+          modalTitle.textContent = departmentName;
+          modalTitle.id = ""; // Clear the ID first
+          modalTitle.id = this.parentNode.id; // Set the ID based on the department ID
+        });
+      });
+</script>
 </html>
